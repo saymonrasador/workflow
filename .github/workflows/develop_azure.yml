@@ -1,48 +1,43 @@
-name: Azure Static Web Apps CI/CD
+name: Develop Pipeline
 
 on:
   push:
     branches:
       - develop
   pull_request:
-    types: [opened, synchronize, reopened, closed]
     branches:
       - develop
 
 jobs:
-  build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+  deploy:
     runs-on: ubuntu-latest
-    name: Build and Deploy Job
-    steps:
 
+    steps:
       # 1) Baixa o código para o ambiente de execução.
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-          lfs: false
+      - name: Checkout do código
+        uses: actions/checkout@v3
 
-      # 2) Usa o token secret para autenticar no Azure e atualiza o conteúdo estático hospedado na Azure Static Web App.
-      - name: Build And Deploy
-        id: builddeploy
+      # 2) Baixa e instala a versão 8.0 do .NET SDK.
+      - name: Instalar .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0'
+
+      # 3) Executa dotnet restore no projeto para baixar pacotes necessários.
+      - name: Restaurar dependências
+        run: dotnet restore gcodb/gcodb.csproj
+
+      # 4) Executa migrações no banco SUPABASE
+      - name: Executar as migrações
+        env:
+          CONNECTION_STRING: ${{ secrets.DEVELOP_DB_URL }} 
+        run: dotnet run --project pipeline.csproj
+
+      # 5) Usa o token secret para autenticar no Azure e atualiza o conteúdo estático hospedado na Azure Static Web App.
+      - name: Deploy para Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WHITE_STONE_0B4E40310 }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }} 
-          action: "upload"
-          app_location: "./web" 
-          api_location: "" 
-          output_location: "." 
-
-  # Ajuda a limpar recursos temporários no Azure Static Web Apps.
-  close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    name: Close Pull Request Job
-    steps:
-      - name: Close Pull Request
-        id: closepullrequest
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WHITE_STONE_0B4E40310 }}
-          action: "close"
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_TOKEN_DEVELOP }}
+          app_location: "/web"
+          output_location: "/"
+          api_location: ""
