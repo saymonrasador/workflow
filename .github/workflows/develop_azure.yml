@@ -1,4 +1,4 @@
-name: Pipeline branch Main
+name: Pipeline branch Develop
 
 on:
   push:
