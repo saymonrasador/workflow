@@ -6,9 +6,8 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+
+
 
 jobs:
   deploy:
@@ -48,4 +47,3 @@ jobs:
         output_location: "/"
         api_location: ""
         action: "upload"
-
