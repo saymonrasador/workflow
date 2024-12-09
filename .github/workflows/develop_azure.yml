@@ -46,3 +46,4 @@ jobs:
         app_location: "/web"
         output_location: "/"
         api_location: ""
+        action: "upload"
