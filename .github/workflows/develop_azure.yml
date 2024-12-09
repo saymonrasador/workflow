@@ -33,7 +33,7 @@ jobs:
       run: echo "$CONNECTION_STRING"
       env:
           CONNECTION_STRING: ${{ secrets.DEVELOP_DB_URL }} 
-      run: dotnet run --project pipeline.csproj
+      #run: dotnet run --project pipeline.csproj
 
     # 5) Usa o token secret para autenticar no Azure e atualiza o conteúdo estático hospedado na Azure Static Web App.
     - name: Deploy para Azure Static Web Apps
