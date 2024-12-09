@@ -1,10 +1,13 @@
 name: Develop Pipeline
 
 on:
-  pull_request:
+  push:
     branches:
       - develop
-        # Executa quando é gerado uma PR
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - develop
 
 jobs:
   deploy:
