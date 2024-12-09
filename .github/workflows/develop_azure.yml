@@ -30,6 +30,7 @@ jobs:
 
     # 4) Executa migrações no banco SUPABASE
     - name: Executar as migrações
+      run: echo "$CONNECTION_STRING"
       env:
           CONNECTION_STRING: ${{ secrets.DEVELOP_DB_URL }} 
       run: dotnet run --project pipeline.csproj

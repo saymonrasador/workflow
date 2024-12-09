@@ -2,5 +2,9 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 
-new ContextoBancoDados().Database.Migrate();    // comando para aplicar migrações
+// Mensagem de verificação para detectar erros
+Console.WriteLine("Using connection string: " + connectionString);
+
+// Comando para aplicar a migração
+new ContextoBancoDados().Database.Migrate();  
 
