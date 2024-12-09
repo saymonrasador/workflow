@@ -28,14 +28,17 @@ jobs:
     - name: Restaurar dependências
       run: dotnet restore pipeline.csproj
 
-    # 4) Executa migrações no banco SUPABASE
+    # 4) Roda o dotnet build
+    - name: Construir com dotnet
+      run: dotnet build --configuration Release
+
+    # 5) Executa migrações no banco SUPABASE
     - name: Executar as migrações
-      run: echo "$CONNECTION_STRING"
       env:
           CONNECTION_STRING: ${{ secrets.DEVELOP_DB_URL }} 
-      #run: dotnet run --project pipeline.csproj
+      run: dotnet run --project pipeline.csproj
 
-    # 5) Usa o token secret para autenticar no Azure e atualiza o conteúdo estático hospedado na Azure Static Web App.
+    # 6) Usa o token secret para autenticar no Azure e atualiza o conteúdo estático hospedado na Azure Static Web App.
     - name: Deploy para Azure Static Web Apps
       uses: Azure/static-web-apps-deploy@v1
       with:
