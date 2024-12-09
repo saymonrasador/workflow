@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 Console.WriteLine("Hello, GCO");
 // Comando para aplicar a migração
-new ContextoBancoDados().Database.Migrate;
+new ContextoBancoDados().Database.Migrate();
 
 
 
