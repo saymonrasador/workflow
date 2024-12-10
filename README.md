@@ -71,6 +71,7 @@ Certifique-se de configurar as variáveis de ambiente como secrets no GitHub:
 - Supabase PostgreSQL
 
 ---
+## Migração
 
 #### Estrutura e Migração:
 - A migração de banco de dados é gerenciada pelo **Entity Framework Core**.
