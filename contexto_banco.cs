@@ -12,17 +12,6 @@ namespace gcodb
         }
 
         // Exemplo de criação de tabela chamada "Cliente"
-        // public DbSet<Cliente> clientes { get; set; }
-
-        // após, crie um arquivo tabelas/clientes.cs
-        // nesse arquivo clientes.cs voce cria de fato a tabela
-
-        // public class Cliente
-        // {
-        // public int Id { get; set; }
-        // public string Nome { get; set; }
-        // public string Email { get; set; }
-        // public DateTime DataCadastro { get; set; }
-        // }
+        public DbSet<Cliente> clientes { get; set; }
     }
 }
