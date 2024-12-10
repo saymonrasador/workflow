@@ -32,8 +32,8 @@ jobs:
     - name: Construir com dotnet
       run: dotnet build --configuration Release
 
-    # 5) Executa migrações no banco SUPABASE
-    - name: Executar as migrações
+    # 5) Aplicar as migrações no banco SUPABASE
+    - name: Aplicar as migrações
       env:
           CONNECTION_STRING: ${{ secrets.DEVELOP_DB_URL }} 
       run: dotnet run --project pipeline.csproj
