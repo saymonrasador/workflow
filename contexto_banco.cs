@@ -13,5 +13,7 @@ namespace gcodb
 
         // Exemplo de criação de tabela chamada "Cliente"
         public DbSet<Cliente> clientes { get; set; }
+        
+        public DbSet<Janeiro> janeiro { get; set; }
     }
 }
