@@ -59,18 +59,6 @@ Certifique-se de configurar as variáveis de ambiente como secrets no GitHub:
 ---
 
 ### **Banco de Dados**
-#### Estrutura e Migração:
-- A migração de banco de dados é gerenciada pelo **Entity Framework Core**.
-- As migrações aplicadas são registradas na tabela interna `__EFMigrationsHistory`.
-
-#### Comandos Úteis:
-1. **Criar uma nova migração:**
-   ```bash
-   dotnet ef migrations add NomeDaMigracao
-2. **Aplicar migrações:**
-  As migrações são aplicadas automaticamente no banco de dados, pois foi definido na pipeline do workflow
-
----
 
 ### **Ferramentas Utilizadas**
 1. **Frameworks e Pacotes:**
@@ -83,6 +71,11 @@ Certifique-se de configurar as variáveis de ambiente como secrets no GitHub:
 - Supabase PostgreSQL
 
 ---
+## Migração
+
+#### Estrutura e Migração:
+- A migração de banco de dados é gerenciada pelo **Entity Framework Core**.
+- As migrações aplicadas são registradas na tabela interna `__EFMigrationsHistory`.
 
 ### **Como Gerar uma Migração**
 1. **Crie ou modifique uma tabela**
@@ -99,6 +92,5 @@ Certifique-se de configurar as variáveis de ambiente como secrets no GitHub:
 4. **Gere uma Migração**
    ```bash
    dotnet ef migrations add NomeDaMigracao
-5. **Agora espere a pipeline executar no GitHub Actions até atualizar o banco de dados do Supabase**
-   No Azure o deploy será realizado automaticamente com base nos workflows configurados.
-   
+5. **Aplicar migrações:**
+  As migrações são aplicadas automaticamente no banco de dados, pois foi definido na pipeline do workflow
